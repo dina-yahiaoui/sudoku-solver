@@ -25,3 +25,13 @@ contradictions dès que possible. Cela rend le programme plus rapide. Il est bea
   Complexité du Backtracking: La complexité du backtracking pour un Sudoku classique est plus difficile à évaluer de manière précise, mais elle est généralement 
 bien meilleure que la force brute. En moyenne, la complexité peut être approximée par O(n!), où 𝑛 est le nombre de cases vides dans la grille. Cela signifie que 
 l'algorithme explore moins d'options et revient plus tôt lorsqu'il rencontre des conflits.
+
+Pour la création des méthodes, on a commencé par faire des maquettes et des diagrammes sur Lucidchart. Cela nous a permis de mieux comprendre le fonctionnement et
+les boucles. Une fois qu'on était tous d'accord sur leur fonctionnement nous avons chacun commencé la base des algo et mis en relation nos infos afin de créer une
+version finale et opérationelle.
+
+Une fois les algo codé, nous avons décidé de créer un tableau excel pour enregistrer tous les résultats. Avec ce tableau Excel, nous notons toutes les données, le 
+choix de la grille, le choix de la méthode et le temps que la méthode a prise pour résoudre le sudoku. 
+Ensuite, un menu a était créé dans le terminal, afin de choisir justement la grille et la méthode. 
+L'affichage a était fait dans le terminal mais également avec une fenêtre Pygame. Cette interface graphique permettra a l'utilsateur d'avoir un résultat final agréable
+et d'avoir un résumé de toutes les données, utile pour la collecte et l'analyse des données. 
