@@ -6,11 +6,8 @@ from interface import launch_interface
 def main():
     print("🧩 Résolution de Sudoku")
     print("Choisissez une grille parmi :")
-    print("1 - Grille 1")
-    print("2 - Grille 2")
-    print("3 - Grille 3")
-    print("4 - Grille 4")
-    print("5 - Grille 5")
+    for i in range(1, 6):
+        print(f"{i} - Grille {i}")
 
     choix = input("Entrez le numéro de la grille (1 à 5) : ")
     while choix not in ["1", "2", "3", "4", "5"]:
@@ -18,47 +15,43 @@ def main():
 
     file_path = os.path.join("examples", f"grille{choix}.txt")
 
-    # === Backtracking ===
-    sudoku_bt = SudokuGrid()
-    sudoku_bt.from_file(file_path)
+    print("\nMéthode de résolution :")
+    print("1 - Backtracking")
+    print("2 - Force brute")
 
-    start_bt = time.time()
-    sudoku_bt.solve_backtracking()
-    end_bt = time.time()
-    bt_time = end_bt - start_bt
+    method = input("Entrez le numéro de la méthode : ")
+    while method not in ["1", "2"]:
+        method = input("Numéro invalide. Choisissez 1 ou 2 : ")
 
-    print("\n✅ Grille résolue avec backtracking :\n")
-    sudoku_bt.display()
-    print(f"\n🕒 Temps backtracking : {bt_time:.6f} secondes")
+    sudoku = SudokuGrid()
+    sudoku.from_file(file_path)
 
-    # === Force brute ===
-    sudoku_fb = SudokuGrid()
-    sudoku_fb.from_file(file_path)
+    print("\n⏳ Résolution en cours...\n")
 
-    start_fb = time.time()
-    solved = sudoku_fb.solve_brute_force()
-    end_fb = time.time()
-    fb_time = end_fb - start_fb
+    start = time.time()
+    solved = False
+
+    if method == "1":
+        solved = sudoku.solve_backtracking()
+        method_name = "Backtracking"
+    elif method == "2":
+        solved = sudoku.solve_brute_force()
+        method_name = "Force brute"
+    
+    end = time.time()
+    elapsed = end - start
 
     if solved:
-        print("\n✅ Grille résolue avec force brute :\n")
-        sudoku_fb.display()
-        print(f"\n🕒 Temps force brute : {fb_time:.6f} secondes")
+        print(f"\n✅ Grille résolue avec {method_name} :\n")
+        sudoku.display()
+        print(f"\n🕒 Temps {method_name.lower()} : {elapsed:.6f} secondes")
     else:
-        print("\n❌ Force brute : trop de cases vides ou échec.")
-        print(f"\n🕒 Temps force brute : {fb_time:.6f} secondes")
+        print(f"\n❌ Résolution impossible avec {method_name}")
+        print(f"\n🕒 Temps écoulé : {elapsed:.6f} secondes")
 
-    # === Comparaison ===
-    print("\n📊 Comparatif de performance :")
-    if solved and bt_time < fb_time:
-        print("➡️  Le backtracking est plus rapide.")
-    elif solved and fb_time < bt_time:
-        print("➡️  La force brute est plus rapide.")
-    else:
-        print("➡️  La force brute a échoué ou temps équivalent.")
+    # Affichage dans l'interface graphique
+    launch_interface(sudoku, elapsed, method_name, solved)
 
-    # === Affichage graphique ===
-    launch_interface(sudoku_bt, bt_time, sudoku_fb, fb_time, solved)
 
 if __name__ == "__main__":
     main()
