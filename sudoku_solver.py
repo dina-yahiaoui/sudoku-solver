@@ -1,4 +1,4 @@
-import time
+import time 
 from colorama import Fore, Style, init
 init(autoreset=True)
 from itertools import product
@@ -52,7 +52,8 @@ class SudokuGrid:
         # Générer toutes les combinaisons possibles de chiffres 1 à 9
         for values in product(range(1, 10), repeat=len(empty_positions)):
             # Vérifier si le temps écoulé dépasse la limite
-            if time.time() - start_time > time_limit:
+            elapsed_time = time.time() - start_time
+            if elapsed_time > time_limit:
                 print(f"⏱️ Limite de temps atteinte après {time_limit} secondes.")
                 return False  # Temps écoulé, arrêt de l'algorithme
 
