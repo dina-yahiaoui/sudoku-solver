@@ -94,4 +94,3 @@ def launch_interface(sudoku, elapsed_time, method_name, solved):
 
     pygame.quit()
     sys.exit()
-
